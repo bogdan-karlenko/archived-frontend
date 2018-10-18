@@ -18,6 +18,6 @@ export class DataService {
     }
 
     getDevices(): Observable<String[]> {
-        return this.http.get<String[]>('./../../assets/devices.json');
+        return this.http.get<String[]>(`${environment.apiUrl}/devices`);
     }
 }

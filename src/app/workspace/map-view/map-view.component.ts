@@ -12,8 +12,8 @@ export class MapViewComponent implements OnInit, AfterViewInit {
 
   mapSettings = {
     center: {
-      lat: 41.709585,
-      lng: -122.643168,
+      lat: 40.719585,
+      lng: -122.743168,
     },
     zoom: 7
   };
@@ -22,6 +22,7 @@ export class MapViewComponent implements OnInit, AfterViewInit {
   map: AgmMap;
   mapCenter = { lat: this.mapSettings.center.lat, lng: this.mapSettings.center.lng };
   mapView = true;
+  itemsPerPage = 6;
 
   dropdownList = [];
   selectedItems = [];
@@ -56,6 +57,12 @@ export class MapViewComponent implements OnInit, AfterViewInit {
         this.dropdownList.push({ id: this.dropdownList.length, itemName: device });
       });
     });
+
+    this.dataService.getProviders()
+      .subscribe(providers => {
+        this.clinics = this.getNearestLocations(this.itemsPerPage, providers);
+        this.fitMapBounds();
+      });
   }
 
   ngAfterViewInit() {
@@ -69,7 +76,7 @@ export class MapViewComponent implements OnInit, AfterViewInit {
     this.clinics = [];
     this.dataService.getProviders(`query={"devices": { "$all": [${this.selectedItems.map(item => '"' + item.itemName + '"')}]}}`)
       .subscribe(providers => {
-        this.clinics = this.getNearestLocations(5, providers);
+        this.clinics = this.getNearestLocations(this.itemsPerPage, providers);
       });
 
 
@@ -105,6 +112,10 @@ export class MapViewComponent implements OnInit, AfterViewInit {
 
   onMapView() {
     this.mapView = true;
+    this.fitMapBounds();
+  }
+
+  fitMapBounds() {
     setTimeout(() => {
       const bounds: LatLngBounds = new window['google'].maps.LatLngBounds();
       for (const clinic of this.clinics) {
