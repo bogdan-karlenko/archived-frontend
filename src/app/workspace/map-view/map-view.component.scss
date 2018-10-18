@@ -1,0 +1,49 @@
+agm-map {
+    height: 35rem;
+}
+
+.ebh-search-button {
+    width: 100%;
+}
+
+.main-container {
+    background-color: white;
+    height: 100%;
+    border-radius: 10px;
+}
+
+.ebh-button {
+    border: none;
+    outline: none;
+    border-radius: 0px;
+    padding: 1em 1.5em 1em 1.5em;
+    margin: 1em;
+    background-color: none;
+    font-size: 14px;
+    color: #3EC28F;
+}
+
+.ebh-button.active {
+    background-color: #EBEBEB;
+}
+
+.ebh-provider-container {
+    border-bottom: 2px solid #EBEBEB;
+    border-radius: 5px;
+    min-height: 120px;
+}
+
+.ebh-left-column {
+    overflow: scroll;
+    border-right: 1px solid #EBEBEB;
+}
+
+.ebh-provider-content {
+font-size: 12px;
+margin-bottom: 0.25em;
+}
+
+.ebh-provider-name {
+    font-size: 16px;
+    font-weight: bold;
+}

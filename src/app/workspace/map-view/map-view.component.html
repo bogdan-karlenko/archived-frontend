@@ -1,0 +1,42 @@
+<div class="main-container row pt-4 pl-3">
+  <div class="col-md-6 ebh-left-column">
+    <div class="ebh-provider-container m-3 row" *ngFor="let provider of clinics">
+      <div class="col-sm-3"><img src="assets/img/no-image.png" width="100px"></div>
+      <div class="col-sm-9">
+        <p class="ebh-provider-content ebh-provider-name">{{provider.name}}</p>
+        <p class="ebh-provider-content">{{provider.devices}}</p>
+        <p class="ebh-provider-content">{{provider.address}}</p>
+        <p class="ebh-provider-content">{{provider.phone}}</p>
+      </div>
+
+    </div>
+  </div>
+  <div class="col-md-6">
+
+    <div class="mx-3">
+      <button class="ebh-button" [class.active]="mapView" (click)="onMapView()"><i class="fas fa-map-marked-alt mr-2"></i>View
+        on a map</button>
+      <button class="ebh-button" [class.active]="!mapView" (click)="mapView=false"><i class="fas fa-search mr-2"></i>Search
+        and filter</button>
+
+      <div [hidden]="mapView">
+        <angular2-multiselect [data]="dropdownList" [(ngModel)]="selectedItems" [settings]="dropdownSettings"></angular2-multiselect>
+        <button class="btn btn-outline-secondary ebh-search-button mt-3" (click)="onSearch()">Search</button>
+      </div>
+
+        <div class="mt-3" [hidden]="!mapView">
+          <agm-map #AgmMap [latitude]="mapSettings.center.lat" [longitude]="mapSettings.center.lng" [zoom]="mapSettings.zoom"
+            [zoomControl]="true" [panControl]="true" (mapClick)="onMapClick($event)" (centerChange)="onMapCenterChange($event)">
+            <agm-marker *ngFor="let provider of clinics" [latitude]="provider.coordinates.lat" [longitude]="provider.coordinates.lng">
+              <agm-info-window>
+                <h5>{{provider.name}}</h5>
+                <p *ngIf="provider.doctors">{{provider.doctors}}</p>
+                <p *ngIf="provider.devices"><b>Devices:</b> {{provider.devices}}</p>
+                <p *ngIf="provider.phone">Telephone: {{provider.phone}}</p>
+              </agm-info-window>
+            </agm-marker>
+          </agm-map>
+        </div>
+    </div>
+  </div>
+</div>
