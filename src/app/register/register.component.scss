@@ -1,0 +1,132 @@
+.ebh-register-container {
+    color: white;
+    margin-top: 5em;
+}
+
+.ebh-register-submit-button {
+    display: flex;
+    outline: none;
+    width: 200px;
+    color: white;
+    border-color: white;
+    font-size: 20px;
+    height: 3em;
+    float: right;
+    align-items: center;
+    justify-content: center;
+}
+
+.ebh-title {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 46px;
+    font-weight: 900;
+}
+
+.ebh-logo {
+    margin-top: -1em;
+}
+
+.ebh-register-social-container {
+    margin-top: 9em;
+    width: 100%;
+    text-align: center;
+}
+
+p {
+    color: white
+}
+
+.ebh-note {
+    float: right;
+    font-size: 12px;
+    font-style: italic;
+}
+
+.ebh-remove {
+    height: 45px;
+    width: 45px;
+    margin-left: 3px;
+    justify-content: center;
+    align-items: center;
+}
+
+// BUTTONS
+.btn-google,
+.btn-fb {
+    display: flex;
+    margin-bottom: 1em;
+    float: left;
+    cursor: pointer;
+    border-radius: 1px;
+    text-decoration: none;
+    box-shadow: 0 2px 4px 0 rgba(0, 0, 0, .25);
+    transition: background-color .218s, border-color .218s, box-shadow .218s;
+}
+
+.google-content,
+.fb-content {
+    display: flex;
+    align-items: center;
+    width: 300px;
+    height: 45px;
+}
+
+.fb-content .logo {
+    padding: 15px;
+    height: inherit;
+}
+
+.google-content .logo {
+    padding: 15px;
+    height: inherit;
+}
+
+.logo svg {
+    width: 18px;
+    height: 18px;
+    position: relative;
+    top: -4px;
+}
+
+.logo p {
+    width: 100%;
+    line-height: 1;
+    letter-spacing: .21px;
+    text-align: center;
+    font-weight: 500;
+    font-family: 'Roboto', sans-serif;
+}
+
+.btn-google {
+    background: #FFF;
+}
+
+.google-content p {
+    margin: 0 auto;
+    color: #757575;
+}
+
+.btn-google:hover {
+    box-shadow: 0 0 3px 3px rgba(66, 133, 244, .3);
+}
+
+.btn-google:active {
+    background-color: #eee;
+}
+
+.btn-fb {
+    background: #4267b2;
+}
+
+.fb-content p {
+    margin: 0 auto;
+    color: rgba(white, .87);
+}
+
+.btn-fb:hover {
+    box-shadow: 0 0 3px 3px rgba(#3b5998, .3);
+}
+
+.btn-fb:active {
+    background-color: #3b5998;
+}
