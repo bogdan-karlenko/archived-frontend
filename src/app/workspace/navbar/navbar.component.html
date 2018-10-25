@@ -1,12 +1,23 @@
 <nav class="navbar sticky-top bg-transparent d-flex justify-content-end">
-        <a href="#" class="nav-link">
+        <a href="signup" class="nav-link" *ngIf="!authService.isAuthentificated">
             <u>Sign up
                 <i class="fas fa-chevron-down ml-1"></i>
             </u>
         </a>
-        <a href="#" class="nav-link">
+        <a href="login" class="nav-link" *ngIf="!authService.isAuthentificated">
             <u>Sign in
                 <i class="fas fa-chevron-down ml-1"></i>
             </u>
         </a>
+        <p class="nav-link" *ngIf="authService.isAuthentificated">
+            <u>{{authService.getAuthInfo().username}}
+            </u>
+        </p>
+        <p class="nav-link" *ngIf="authService.isAuthentificated" (click)="authService.logout()">
+            <u>Log out
+                <i class="fas fa-chevron-down ml-1"></i>
+            </u>
+        </p>
+
+
     </nav>

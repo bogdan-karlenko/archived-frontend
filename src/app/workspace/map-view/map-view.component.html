@@ -1,5 +1,16 @@
 <div class="main-container row pt-4 pl-3">
   <div class="col-md-6 ebh-left-column">
+    <div class="ebh-loader" *ngIf="loading">
+      <!--loader starts-->
+      <div class="lds-ring">
+        <!--four empty divs-->
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+      </div>
+      <!--loader ends-->
+    </div>
     <div class="ebh-provider-container m-3 row" *ngFor="let provider of clinics">
       <div class="col-sm-3"><img src="assets/img/no-image.png" width="100px"></div>
       <div class="col-sm-9">
@@ -24,19 +35,19 @@
         <button class="btn btn-outline-secondary ebh-search-button mt-3" (click)="onSearch()">Search</button>
       </div>
 
-        <div class="mt-3" [hidden]="!mapView">
-          <agm-map #AgmMap [latitude]="mapSettings.center.lat" [longitude]="mapSettings.center.lng" [zoom]="mapSettings.zoom"
-            [zoomControl]="true" [panControl]="true" (mapClick)="onMapClick($event)" (centerChange)="onMapCenterChange($event)">
-            <agm-marker *ngFor="let provider of clinics" [latitude]="provider.coordinates.lat" [longitude]="provider.coordinates.lng">
-              <agm-info-window>
-                <h5>{{provider.name}}</h5>
-                <p *ngIf="provider.doctors">{{provider.doctors}}</p>
-                <p *ngIf="provider.devices"><b>Devices:</b> {{provider.devices}}</p>
-                <p *ngIf="provider.phone">Telephone: {{provider.phone}}</p>
-              </agm-info-window>
-            </agm-marker>
-          </agm-map>
-        </div>
+      <div class="mt-3" [hidden]="!mapView">
+        <agm-map #AgmMap [latitude]="mapSettings.center.lat" [longitude]="mapSettings.center.lng" [zoom]="mapSettings.zoom"
+          [zoomControl]="true" [panControl]="true" (mapClick)="onMapClick($event)" (centerChange)="onMapCenterChange($event)">
+          <agm-marker *ngFor="let provider of clinics" [latitude]="provider.coordinates.lat" [longitude]="provider.coordinates.lng">
+            <agm-info-window>
+              <h5>{{provider.name}}</h5>
+              <p *ngIf="provider.doctors">{{provider.doctors}}</p>
+              <p *ngIf="provider.devices"><b>Devices:</b> {{provider.devices}}</p>
+              <p *ngIf="provider.phone">Telephone: {{provider.phone}}</p>
+            </agm-info-window>
+          </agm-marker>
+        </agm-map>
+      </div>
     </div>
   </div>
 </div>

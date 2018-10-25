@@ -23,6 +23,7 @@ export class MapViewComponent implements OnInit, AfterViewInit {
   mapCenter = { lat: this.mapSettings.center.lat, lng: this.mapSettings.center.lng };
   mapView = true;
   itemsPerPage = 6;
+  loading = true;
 
   dropdownList = [];
   selectedItems = [];
@@ -61,6 +62,7 @@ export class MapViewComponent implements OnInit, AfterViewInit {
     this.dataService.getProviders()
       .subscribe(providers => {
         this.clinics = this.getNearestLocations(this.itemsPerPage, providers);
+        this.loading = false;
         this.fitMapBounds();
       });
   }
@@ -74,9 +76,11 @@ export class MapViewComponent implements OnInit, AfterViewInit {
 
   findClinics() {
     this.clinics = [];
+    this.loading = true;
     this.dataService.getProviders(`query={"devices": { "$all": [${this.selectedItems.map(item => '"' + item.itemName + '"')}]}}`)
       .subscribe(providers => {
         this.clinics = this.getNearestLocations(this.itemsPerPage, providers);
+        this.loading = false;
       });
 
 
@@ -119,11 +123,8 @@ export class MapViewComponent implements OnInit, AfterViewInit {
     setTimeout(() => {
       const bounds: LatLngBounds = new window['google'].maps.LatLngBounds();
       for (const clinic of this.clinics) {
-        bounds.extend(new window['google'].maps.LatLng(clinic.coordinates.lat, clinic.coordinates.lng));
-        if (this.clinics.length === 1) {
           bounds.extend(new window['google'].maps.LatLng(clinic.coordinates.lat + 0.001, clinic.coordinates.lng + 0.001));
           bounds.extend(new window['google'].maps.LatLng(clinic.coordinates.lat - 0.001, clinic.coordinates.lng - 0.001));
-        }
       }
       (this.map as any).fitBounds(bounds, 0);
     }, 0);
